@@ -11,17 +11,36 @@ const Navbar = () => {
             </Link>
             <button
                 id="hamburger-button"
-                className="md:hidden flex flex-col gap-1"
+                className="md:hidden flex flex-col gap-1 "
                 onClick={toggleMenu}
             >
                 <div className="w-5 h-1 bg-black"></div>
                 <div className="w-4 h-1 bg-black"></div>
                 <div className="w-3 h-1 bg-black"></div>
             </button>
-            <div id="menu" className="w-2/3 h-screen">
-                abc
+            <div
+                id="menu"
+                className="hidden w-2/3 h-2/3 absolute right-0 top-28 bg-gray-500 text-rose-500 z-10 font-bold"
+            >
+                <ul className="">
+                    <li>
+                        <NavLink to="/" className="font-bitter text-xl ">
+                            Home
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/store" className="font-bitter text-xl ">
+                            Store
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/about" className="font-bitter text-xl ">
+                            About
+                        </NavLink>
+                    </li>
+                </ul>
             </div>
-            
+
             <div className="hidden md:block">
                 <ul className="flex gap-5">
                     <li>

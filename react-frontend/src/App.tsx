@@ -8,7 +8,7 @@ function App() {
     return (
         <>
             <Navbar />
-            <div className="mb-4 mx-4">
+            <div className="justify-center w-2/3 mx-auto text-center">
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/store" element={<Store />} />
