@@ -5,22 +5,21 @@ const Navbar = () => {
         document.getElementById("menu")?.classList.toggle("hidden");
     };
     return (
-        <nav className="bg-white shadow-md flex items-end px-2 py-2">
-            <Link to="/" className="font-bitter text-5xl flex-1 text-rose-500">
+        <nav className="flex items-end bg-white px-2 py-2 shadow-md">
+            <Link to="/" className="flex-1 font-bitter text-5xl text-rose-500">
                 Retail Shop System
             </Link>
             <button
-                id="hamburger-button"
-                className="md:hidden flex flex-col gap-1 "
+                className="flex flex-col gap-1 md:hidden"
                 onClick={toggleMenu}
             >
-                <div className="w-5 h-1 bg-black"></div>
-                <div className="w-4 h-1 bg-black"></div>
-                <div className="w-3 h-1 bg-black"></div>
+                <div className="h-1 w-5 bg-black"></div>
+                <div className="h-1 w-4 bg-black"></div>
+                <div className="h-1 w-3 bg-black"></div>
             </button>
             <div
                 id="menu"
-                className="hidden w-2/3 h-2/3 absolute right-0 top-28 bg-gray-500 text-rose-500 z-10 font-bold"
+                className="absolute right-0 top-28 z-10 hidden h-2/3 w-2/3 bg-gray-500 font-bold text-rose-500"
             >
                 <ul className="">
                     <li>
