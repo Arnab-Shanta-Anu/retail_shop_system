@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function () {
     return request()->user();
 });
 
-Route::get('/test', function () {
-    return response()->json(["msg"=>"Hello World!"]);
+Route::get('/customers', function () {
+    return response()->json(Customer::all());
 });
