@@ -22,3 +22,17 @@ Route::middleware('auth:sanctum')->get('/user', function () {
 Route::get('/customers', function () {
     return response()->json(Customer::all());
 });
+Route::get('/employees', function () {
+    return response()->json(["msg" => "na"]);
+});
+Route::get('/products', function () {
+    return response()->json(["msg" => "na"]);
+});
+Route::get('/products/1', function () {
+    return response()->json(
+        [
+            "id" => 1,
+            "price" => 50
+        ]
+        );
+});

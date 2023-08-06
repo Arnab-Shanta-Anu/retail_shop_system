@@ -1,85 +1,86 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import InvoiceTable from "../components/invoiceTable";
 
 const Home = () => {
     const [customerList, setCustomerList] = useState([]);
+    const [employeeList, setEmployeeList] = useState([]);
+    const [rows, setRows] = useState([
+        {
+            id: 1,
+            details: "abc",
+            price: 12.5,
+            quantity: 5,
+        },
+        {
+            id: 2,
+            details: "def",
+            price: 123,
+            quantity: 3,
+        },
+    ]);
+
     useEffect(() => {
         axios
             .get("http://localhost:8000/api/customers")
             .then((response) => setCustomerList(response.data));
     }, []);
 
-    const spawnRow = () => {
-        const tableRow = [
-            <td className="border-2 border-black">
-                <input type="text" value="p-1234" />
-            </td>,
-            <td className="border-2 border-black">abc</td>,
-            <td className="border-2 border-black">50</td>,
-            <td className="border-2 border-black">3</td>,
-            <td className="border-2 border-black">150</td>,
-        ];
+    useEffect(() => {
+        axios
+            .get("http://localhost:8000/api/employees")
+            .then((response) => setEmployeeList(response.data));
+    }, []);
+
+    const handleSubmit = (e: { preventDefault: () => void }) => {
+        console.log("Submit");
+        //TODO: send data to database
     };
-    const handleSubmit = (e) => {
+
+    const addRow = (newRow: any) => {
+        setRows((oldRows) => [...oldRows, newRow]);
+    };
+
+    const handleAddItem = (e) => {
         e.preventDefault();
+        addRow({ id: 3, details: "ghi", price: 13, quantity: 4 });
     };
+
+    const handleAddCustomer = (e: { preventDefault: () => void }) => {
+        //TODO: add a customer to database
+    };
+
     return (
-        <>
-            <form className="mt-5 flex flex-col" onSubmit={handleSubmit}>
-                <fieldset className="grid grid-cols-2 md:grid-cols-3">
-                    <label>Customer: </label>
-                    <select className="min-w-max">
-                        {customerList.map((customer) => (
-                            <option key={customer["id"]}>
-                                {customer["name"]}
-                            </option>
-                        ))}
-                    </select>
-                    <button className="col-span-2 rounded-md bg-rose-500 px-2 shadow-sm md:col-span-1">
-                        Create
-                    </button>
-                </fieldset>
-                <table>
-                    <thead>
-                        <tr>
-                            <th className="border-2 border-black font-bitter">
-                                Product id
-                            </th>
-                            <th className="border-2 border-black font-bitter">
-                                Details
-                            </th>
-                            <th className="border-2 border-black font-bitter">
-                                Price
-                            </th>
-                            <th className="border-2 border-black font-bitter">
-                                Quantity
-                            </th>
-                            <th className="border-2 border-black font-bitter">
-                                Total
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <td className="border-2 border-black">
-                            <input type="text" value="p-1234" />
-                        </td>
-                        <td className="border-2 border-black">abc</td>
-                        <td className="border-2 border-black">50</td>
-                        <td className="border-2 border-black">3</td>
-                        <td className="border-2 border-black">150</td>
-                    </tbody>
-                </table>
+        <form>
+            <fieldset className="grid grid-cols-2 md:grid-cols-3">
+                <label>Customer: </label>
+                <select name="" id="">
+                    {customerList.map((customer) => (
+                        <option key={customer["id"]}>{customer["name"]}</option>
+                    ))}
+                </select>
                 <button
-                    onClick={spawnRow}
-                    className="mx-auto w-fit rounded-md bg-blue-500 px-4 shadow-sm"
+                    className="rounded-md bg-rose-500 px-2 shadow-sm"
+                    onClick={handleAddCustomer}
                 >
-                    +
+                    Create
                 </button>
-                <button className="rounded-md bg-green-500 px-2 shadow-sm">
-                    Submit
-                </button>
-            </form>
-        </>
+            </fieldset>
+            <InvoiceTable rows={rows} />
+            <button
+                className="rounded-md bg-blue-500 px-2 shadow-sm"
+                onClick={handleAddItem}
+            >
+                add item
+            </button>
+            &nbsp;
+            <button
+                className="rounded-md bg-green-500 px-2 shadow-sm"
+                onClick={handleSubmit}
+            >
+                Submit
+            </button>
+        </form>
     );
 };
 
