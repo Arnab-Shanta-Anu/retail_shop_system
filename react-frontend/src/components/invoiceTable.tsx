@@ -3,13 +3,7 @@ import { useState } from "react";
 const InvoiceTable = (props) => {
     const [total, setTotal] = useState(0);
 
-    const handleEdit = (e) => {
-        e.preventDefault();
-    };
 
-    const handleDelete = (e) => {
-        e.preventDefault();
-    };
     return (
         <table className="w-full">
             <thead>
@@ -35,7 +29,7 @@ const InvoiceTable = (props) => {
                 </tr>
             </thead>
             <tbody>
-                {props.rows.map((row) => (
+                {props.rows.map((row: { [x: string]: number; }) => (
                     <tr key={row["id"]}>
                         <td className="border-2 border-black">{row["id"]}</td>
                         <td className="border-2 border-black">
@@ -53,14 +47,14 @@ const InvoiceTable = (props) => {
                         <td className="border-2 border-black">
                             <button
                                 className="rounded-md bg-blue-500 px-2 shadow-sm"
-                                onClick={handleEdit}
+                                onClick={()=>props.handleEdit(row["id"])}
                             >
                                 edit
                             </button>
                             &nbsp;
                             <button
                                 className="rounded-md bg-rose-500 px-2 shadow-sm"
-                                onClick={handleDelete}
+                                onClick={()=>props.handleDelete(row["id"])}
                             >
                                 delete
                             </button>

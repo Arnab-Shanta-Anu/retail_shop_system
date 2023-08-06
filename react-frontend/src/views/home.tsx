@@ -46,6 +46,16 @@ const Home = () => {
         addRow({ id: 3, details: "ghi", price: 13, quantity: 4 });
     };
 
+    const handleDelete = (id:number): void => {
+        setRows((oldRows) => oldRows.filter((row) => row.id!== id));
+    }
+
+    const handleEdit = (id:number): void => {
+        const newRow = rows.filter((row) => row.id === id)
+        handleDelete(newRow[0].id);
+        
+    }
+
     const handleAddCustomer = (e: { preventDefault: () => void }) => {
         //TODO: add a customer to database
     };
@@ -66,7 +76,7 @@ const Home = () => {
                     Create
                 </button>
             </fieldset>
-            <InvoiceTable rows={rows} />
+            <InvoiceTable rows={rows} handleDelete={handleDelete} handleEdit={ handleEdit} />
             <button
                 className="rounded-md bg-blue-500 px-2 shadow-sm"
                 onClick={handleAddItem}
